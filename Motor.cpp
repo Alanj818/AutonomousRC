@@ -22,3 +22,11 @@ void Motor::motorBrake(){
 void Motor::offGas(){
   Serial.println("Off Gas Simulated"); 
 }
+
+void Motor::update(){
+  Serial.println("Motor Update Simulated");
+}
+
+void Motor::begin(){
+  Serial.println("Motor Begin Simulated");
+}

@@ -11,6 +11,8 @@ class Motor{
     void goReverse(); 
     void motorBrake(); 
     void offGas(); 
+    void update(); 
+    void begin(); 
 
   private: 
     int motorId;

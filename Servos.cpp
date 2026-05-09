@@ -15,3 +15,11 @@ void Servos::steer(int x, int y){
   //do steer calculations
 }
 
+void Servos::update(){
+  Serial.println("Servos Update Simulated"); 
+}
+
+void Servos::begin(){
+  Serial.println("Servos Begin Simulated"); 
+}
+
