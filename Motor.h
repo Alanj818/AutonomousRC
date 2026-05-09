@@ -10,7 +10,7 @@ class Motor{
     void goFoward(); 
     void goReverse(); 
     void motorBrake(); 
-    void OffGas(); 
+    void offGas(); 
 
   private: 
     int motorId;
@@ -20,7 +20,7 @@ class Motor{
     int bumberL; 
     int bumberR; 
 
-}
+};
 
 // void goFoward(); //I want this to be a button press or switch, on for drive
 // void goReverse(); //I want this to be a button press or switch, off for reverse

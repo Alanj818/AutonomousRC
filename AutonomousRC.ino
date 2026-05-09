@@ -8,10 +8,10 @@
 
 //virtualize hardware for now 
 
-setup(){
+void setup(){
 
 }
 
-loop(){
+void loop(){
 
 }

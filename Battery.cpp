@@ -9,7 +9,8 @@ float batADC(float raw){
 }
 
 int batPercent(float adc){
-  int adc = 0; //Here we will calculate the percentage of the battery 
+  int percent = 0;//Here we will calculate the percentage of the battery 
+
   return percent; 
 }
 

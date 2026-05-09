@@ -5,10 +5,10 @@
 
 
 Servos::Servos(int id){
-  id = servosId; 
+  servosId = id;
 }
 
-Servos::steer(int x, int y){
+void Servos::steer(int x, int y){
   x = joyX; 
   y = joyY; 
 

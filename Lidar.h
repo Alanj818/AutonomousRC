@@ -12,5 +12,5 @@ class Lidar{
   private: 
     int LidarId; 
     int distance;
-}
+};
 #endif

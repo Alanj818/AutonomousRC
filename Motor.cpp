@@ -4,7 +4,7 @@
 //Motor Control
 
 Motor::Motor(int id){
-  id = motorId; 
+  motorId = id;
 }
 
 void Motor::goFoward(){

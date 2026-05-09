@@ -4,7 +4,7 @@
 //Not sure yet, Lidar functionallity/data parsing
 
 Lidar::Lidar(int id){
-  id = LidarId; 
+  LidarId = id;
 }
 
 void Lidar::begin(){

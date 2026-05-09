@@ -13,5 +13,5 @@ class Servos{
     int joyY; 
     int joyX; 
     int servosId; 
-}
+};
 #endif
