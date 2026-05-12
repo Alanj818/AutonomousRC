@@ -16,6 +16,11 @@ jobs:
         run: |
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 
+      - name: Show available cores
+        run: |
+          ./bin/arduino-cli core search bluepad
+          ./bin/arduino-cli core search esp32
+
       - name: Setup board packages
         run: |
           ./bin/arduino-cli config init
@@ -30,11 +35,7 @@ jobs:
 
           # Install the Bluepad32-modified ESP32 core
           ./bin/arduino-cli core install esp32:esp32_bluepad32
-          
-      - name: Show available cores
-        run: |
-          ./bin/arduino-cli core search bluepad
-          ./bin/arduino-cli core search esp32
+        
 
       - name: Compile
         run: |
