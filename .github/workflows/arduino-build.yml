@@ -29,7 +29,7 @@ jobs:
           ./bin/arduino-cli core update-index
 
           # Install the Bluepad32-modified ESP32 core
-          ./bin/arduino-cli core install esp32:esp32
+          ./bin/arduino-cli core install esp32_bluepad32:esp32
 
       - name: Compile
         run: |
