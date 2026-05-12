@@ -32,9 +32,9 @@ jobs:
           ./bin/arduino-cli core install esp32:esp32_bluepad32
           
       - name: Show available cores
-      run: |
-        ./bin/arduino-cli core search bluepad
-        ./bin/arduino-cli core search esp32
+        run: |
+          ./bin/arduino-cli core search bluepad
+          ./bin/arduino-cli core search esp32
 
       - name: Compile
         run: |
