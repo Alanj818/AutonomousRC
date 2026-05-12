@@ -3,10 +3,11 @@
 #include "Motor.h"
 #include "Lidar.h"
 #include "Servos.h"
+#include "GamepadInput.h"
 
 class RcController{
   public:
-    RcController(Motor* mo, Servos* s, Lidar* l);
+    RcController(Motor* mo, Servos* s, Lidar* l, GamepadInput* g);
 
     void begin(); 
     void update(); 
@@ -15,6 +16,7 @@ class RcController{
     Motor* motor; 
     Servos* servos; 
     Lidar* lidar; 
+    GamepadInput* gamepad;
 };
 
 #endif

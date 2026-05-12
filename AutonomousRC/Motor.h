@@ -2,6 +2,7 @@
 #define MOTOR_H
 
 #define MOTOR_PIN some_pin
+#include <Arduino.h>
 
 class Motor{
   public:
@@ -9,18 +10,20 @@ class Motor{
 
     void goFoward(); 
     void goReverse(); 
-    void motorBrake(); 
+    void motorBrake(int32_t throttle, int32_t brake); 
     void offGas(); 
     void update(); 
     void begin(); 
+    void setThrottleSpeed(int32_t throttle);
+    void setBrakeSpeed(int32_t brake);
+    void setSpeed(int speed);
 
   private: 
     int motorId;
     bool gearSwitch; 
-    int throttle; 
-    int brake; //bluepad32 uses brake(), take precauseion here for brake value 
-    int bumberL; 
-    int bumberR; 
+    int speed;
+    int32_t throttle;
+    int32_t brake;
 
 };
 

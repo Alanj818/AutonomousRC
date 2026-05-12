@@ -7,23 +7,33 @@
 #include "RcController.h"
 
 //virtualize hardware for now 
+/*
+COMPONENTS: 
+  brushless motors with ECMs
+  Lidar camera 
+  Servos
+  Xbox/PS5 controller
+
+HARDWARE: 
+  motor driver
+  GPIO pins
+*/
 
 Motor motor(0);
 Lidar lidar(0); 
 Servos servos(0);
-
-RcController controller(&motor, &servos, &lidar);
+GamepadInput gamepad;
+RcController controller(&motor, &servos, &lidar, &gamepad);
 
 
 void setup(){
   Serial.begin(115200); 
   delay(500); 
-  
   controller.begin();
   delay(5000); 
 }
 
 void loop(){
   controller.update();
-  delay(3000);
+  delay(3000); //for debugging reasons, will take this away after so the loop is continuous and fast. 
 }

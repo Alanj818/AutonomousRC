@@ -1,6 +1,6 @@
 #include "GamepadInput.h"
 
-GamepadInput* gamepadInstance = nullptr;
+static GamepadInput* gamepadInstance = nullptr;
 
 int32_t GamepadInput::getThrottle(){
   return throttle;
