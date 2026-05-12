@@ -17,12 +17,18 @@ void RcController::update(){
   int32_t throttle = gamepad->getThrottle();
   int32_t brake = gamepad->getBrake();
   
-  if(brake > 0 && throttle > 0){
-    motor->motorBrake(throttle, brake);
-  } else {
-    motor->setThrottleSpeed(throttle);
-    motor->setBrakeSpeed(brake);
-  }
+if (throttle > 0 && brake > 0) {
+  motor->motorBrake(throttle, brake);
+} 
+else if (throttle > 0) {
+  motor->setThrottleSpeed(throttle);
+} 
+else if (brake > 0) {
+  motor->setBrakeSpeed(brake);
+} 
+else {
+  motor->setSpeed(0);
+}
   motor->update();
 
   //add more functionality here, distance, traction control, anything else i could include 

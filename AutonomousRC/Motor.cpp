@@ -9,11 +9,6 @@ Motor::Motor(int id){
 
 void Motor::setSpeed(int s){
   speed = s; 
-  if(speed > 0){
-    Motor::goFoward();
-  } else {
-    Motor::goReverse();
-  }
 }
 
 void Motor::setThrottleSpeed(int32_t t){
@@ -24,8 +19,8 @@ void Motor::setThrottleSpeed(int32_t t){
 
 void Motor::setBrakeSpeed(int32_t b){
   brake = b;
-  speed = map(brake, 0, 1024, 0, -100);
-  Motor::setSpeed(speed);
+  int s = map(brake, 0, 1024, 0, -100);
+  Motor::setSpeed(s);
 }
 
 //it feels like im rewriting code here, so gonna optimize another time, currently just want this to work
@@ -51,9 +46,9 @@ void Motor::motorBrake(int32_t throttle, int32_t brake){
   int brakeSpeed = map(brake, 0, 1024, 0, -100);
   int throttleSpeed = map(throttle, 0, 1024, 0, 100);
 
-  speed = throttleSpeed - brakeSpeed;
+  int s = throttleSpeed + brakeSpeed;
   
-  Motor::setSpeed(speed);
+  Motor::setSpeed(s);
 }
 
 void Motor::offGas(){
@@ -64,18 +59,29 @@ void Motor::update(){
   //running this function should update the analog/speed values
   Serial.println("Motor Update Simulated");
 
-  Serial.print("analog value of speed: "); 
+  Serial.print("analog value of speed "); 
   Serial.print(speed);
-  Serial.print(" is -> "); 
+  Serial.print(" is analog-> "); 
 
+  int analogSpeed = 0;
   if(speed > 0){
-    Motor::goFoward();
-  } else if (speed < 0){
-    Motor::goReverse();
+    analogSpeed = map(speed, 0, 100, 0, 255); 
+    Serial.print(analogSpeed);
+     Serial.println();
+    goFoward();
+  } else if(speed < 0){
+    analogSpeed = map(speed, -100, 0, 255, 0);
+    Serial.print(analogSpeed);
+    Serial.println();
+    goReverse();
+  } else if(speed == 0){
+    Serial.print(0);
+    Serial.println();
+    setSpeed(0);
   }
   
-  int analogSpeed = map(speed, 0, 100, 0, 255) || map(speed, 0, -100, 0, 255);
-  Serial.print(analogSpeed);
+  
+ 
 
   //if its going foward, the speed should be between 0 and 100
   //if its going reverse, the speed should be between -100 and 0

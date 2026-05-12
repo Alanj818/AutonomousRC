@@ -21,6 +21,7 @@ joystick GamepadInput::getSteer(){
 void onConnectedController(ControllerPtr ctl){ //Bluepad32 callback function, not part of GamepadInput.h
   if(gamepadInstance != nullptr){
     gamepadInstance->setController(ctl); 
+    Serial.print("Controller Connected");
   }
 }
 
@@ -48,20 +49,29 @@ bool GamepadInput::isConnected(){
   return controller != nullptr && controller->isConnected();
 }
 
-void GamepadInput::update(){
-  BP32.update(); 
-  if(controller != nullptr && controller->isConnected() && controller->hasData()){
+void GamepadInput::update() {
+  bool dataUpdated = BP32.update();
+
+  if (!dataUpdated) {
+    return;  
+  }
+
+  if (controller != nullptr && controller->isConnected() && controller->hasData()) {
     throttle = controller->throttle();
     brake = controller->brake();
-    joyY = controller->axisY(); 
-    joyX = controller ->axisX(); 
-  } else{
-    throttle = 0;
-    brake = 0;
-    joyY = 0; 
-    joyX = 0; 
+    joyY = controller->axisY();
+    joyX = controller->axisX();
   }
+
+  if (controller == nullptr || !controller->isConnected()) {
+  throttle = 0;
+  brake = 0;
+  joyY = 0;
+  joyX = 0;
+  return;
 }
+}
+
 
 void GamepadInput::begin(){
   gamepadInstance = this;
