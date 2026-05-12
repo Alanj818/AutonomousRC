@@ -20,7 +20,7 @@ jobs:
         run: |
           ./bin/arduino-cli core search bluepad
           ./bin/arduino-cli core search esp32
-
+    
       - name: Setup board packages
         run: |
           ./bin/arduino-cli config init
@@ -33,9 +33,8 @@ jobs:
 
           ./bin/arduino-cli core update-index
 
-          # Install the Bluepad32-modified ESP32 core
-          ./bin/arduino-cli core install arduino:esp32
-        
+          # THIS is the important line
+          ./bin/arduino-cli core install esp32_bluepad32:esp32
 
       - name: Compile
         run: |
