@@ -19,20 +19,15 @@ jobs:
       - name: Setup board packages
         run: |
           ./bin/arduino-cli config init
-
-          ./bin/arduino-cli config add board_manager.additional_urls \
-            https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-
-          ./bin/arduino-cli config add board_manager.additional_urls \
-            https://raw.githubusercontent.com/ricardoquesada/esp32-arduino-lib-builder/master/bluepad32_files/package_esp32_bluepad32_index.json
-
+          ./bin/arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+          ./bin/arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/ricardoquesada/esp32-arduino-lib-builder/master/bluepad32_files/package_esp32_bluepad32_index.json
           ./bin/arduino-cli core update-index
-
-          # Install the Bluepad32-modified ESP32 core
           ./bin/arduino-cli core install esp32:esp32
+
+      - name: Install Bluepad32 library
+        run: |
+          ./bin/arduino-cli lib install "Bluepad32"
 
       - name: Compile
         run: |
-          ./bin/arduino-cli compile \
-            --fqbn esp32:esp32:esp32s3 \
-            AutonomousRC
+          ./bin/arduino-cli compile --fqbn esp32:esp32:esp32s3 AutonomousRC
