@@ -1,4 +1,4 @@
-name: Arduino Build
+name: ESP32 + Bluepad32 Build
 
 on:
   push:
@@ -15,6 +15,9 @@ jobs:
       - name: Compile Arduino sketch
         uses: arduino/compile-sketches@v1
         with:
-          fqbn: arduino:avr:uno
+          platforms: |
+            - name: esp32_bluepad32:esp32
+              source-url: https://raw.githubusercontent.com/ricardoquesada/esp32-arduino-lib-builder/bluepad32/package_esp32_bluepad32_index.json
+          fqbn: esp32_bluepad32:esp32:esp32s3
           sketch-paths: |
             AutonomousRC
