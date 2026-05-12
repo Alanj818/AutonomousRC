@@ -34,7 +34,7 @@ jobs:
           ./bin/arduino-cli core update-index
 
           # THIS is the important line
-          ./bin/arduino-cli core install esp32-bluepad32:esp32
+          ./bin/arduino-cli core install esp32-bluepad32:esp32_bluepad32
 
       - name: Compile
         run: |
