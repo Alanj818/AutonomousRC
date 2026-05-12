@@ -34,10 +34,10 @@ jobs:
           ./bin/arduino-cli core update-index
 
           # THIS is the important line
-          ./bin/arduino-cli core install esp32_bluepad32:esp32
+          ./bin/arduino-cli core install esp32-bluepad32:esp32
 
       - name: Compile
         run: |
           ./bin/arduino-cli compile \
-            --fqbn arduino:esp32:esp32wrover \
+            --fqbn esp32_bluepad32:esp32:esp32 \
             AutonomousRC
