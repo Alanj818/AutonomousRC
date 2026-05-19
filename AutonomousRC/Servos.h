@@ -1,19 +1,22 @@
 #ifndef SERVOS_H
 #define SERVOS_H
 
-#define SERVO_PIN some_pin
+#define SERVO1_PIN 15
+
+#include <ESP32Servo.h>
 
 class Servos{
   public:
     Servos(int id);
 
-    void steer(int x, int y); //using joystic for this, x coordinates matter most 
+    void steer(int joyStick); //using joystic for this, x coordinates matter most 
     void update();
     void begin();
-
   private: 
-    int joyY; 
-    int joyX; 
-    int servosId; 
+    Servo servo1; //steering 
+    Servo servo2; //gonna mount lidar camera on this one
+    int steerAngle; // stores the steering Angle from 0 to 180
+    int servosId;   //stores servoId (don't need this yet I think)
+    
 };
 #endif

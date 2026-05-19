@@ -16,6 +16,7 @@ void RcController::update(){
   gamepad->update();
   int32_t throttle = gamepad->getThrottle();
   int32_t brake = gamepad->getBrake();
+  joystick joyStick = gamepad->getSteer();
   
 if (throttle > 0 && brake > 0) {
   motor->motorBrake(throttle, brake);
@@ -29,6 +30,10 @@ else if (brake > 0) {
 else {
   motor->setSpeed(0);
 }
+
+  servos->steer(joyStick.x);
+
+  servos->update();
   motor->update();
 
   //add more functionality here, distance, traction control, anything else i could include 

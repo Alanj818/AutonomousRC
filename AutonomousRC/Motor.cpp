@@ -67,7 +67,7 @@ void Motor::update(){
   if(speed > 0){
     analogSpeed = map(speed, 0, 100, 0, 255); 
     Serial.print(analogSpeed);
-     Serial.println();
+    Serial.println();
     goFoward();
   } else if(speed < 0){
     analogSpeed = map(speed, -100, 0, 255, 0);
