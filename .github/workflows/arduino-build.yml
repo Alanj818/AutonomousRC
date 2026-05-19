@@ -29,6 +29,10 @@ jobs:
           ./bin/arduino-cli core update-index
 
           ./bin/arduino-cli core install esp32-bluepad32:esp32
+        
+      - name: ESP32Servo Install
+        run: |
+          ./bin/arduino-cli lib install ESP32Servo
 
       - name: Compile
         run: |
