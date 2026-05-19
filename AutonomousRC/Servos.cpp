@@ -29,7 +29,7 @@ void Servos::update(){
 }
 
 void Servos::begin(){
-  servo1.attach(SERVO_PIN); //attatch the servo pin 
+  servo1.attach(SERVO1_PIN); //attatch the servo pin 
   ESP32PWM::allocateTimer(0);
   ESP32PWM::allocateTimer(1);
   ESP32PWM::allocateTimer(2);
