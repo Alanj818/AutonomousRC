@@ -32,7 +32,11 @@ else {
 }
 
   servos->steer(joyStick.x);
-
+  Serial.print("Throttle & Brake: ");
+  Serial.print(throttle);
+  Serial.print(", ");
+  Serial.print(brake);
+  Serial.println();
   servos->update();
   motor->update();
 

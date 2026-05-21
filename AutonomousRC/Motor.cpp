@@ -1,7 +1,13 @@
 #include "Motor.h"
-#include <Arduino.h>
 
 //Motor Control
+
+//ECS ACTS LIKE SERVO 
+//1000ms - 2000ms pulse Widths from 0 throttle to 100 throttle, at 50hz
+
+//ECS takes those pulse widths, then decides Duty Cycle 0 to 100 from there at 1700Hz
+
+//RESTRUCTURE
 
 Motor::Motor(int id){
   motorId = id;
@@ -15,6 +21,7 @@ void Motor::setThrottleSpeed(int32_t t){
   throttle = t;
   int s = map(throttle, 0, 1024, 0, 100);
   Motor::setSpeed(s);
+
 }
 
 void Motor::setBrakeSpeed(int32_t b){
@@ -28,15 +35,19 @@ void Motor::setBrakeSpeed(int32_t b){
 void Motor::goFoward(){
   Serial.println("Go Foward Simulated"); 
   //Here we will program the motor driver to make the motor go clockwise
-  int analogFoward = map(throttle, 0, 1024, 0, 255);
+  int analogFoward = map(speed, 0, 100, 1500, 2000);
   //here we analogWrite(pin, analogFoward);
+
+  esc.writeMicroseconds(analogFoward);
 }
 
 void Motor::goReverse(){
   Serial.println("Go Reverse Simulated"); 
   //Here we will program the motor driver to make the motor go counter-clockwise 
-  int analogReverse = map(brake, 0, 1024, 0, 255);
+  int analogReverse = map(speed, -100, 0, 1000, 1500);
   //here we analogWrite
+
+  esc.writeMicroseconds(analogReverse);
 }
 
 void Motor::motorBrake(int32_t throttle, int32_t brake){
@@ -46,13 +57,16 @@ void Motor::motorBrake(int32_t throttle, int32_t brake){
   int brakeSpeed = map(brake, 0, 1024, 0, -100);
   int throttleSpeed = map(throttle, 0, 1024, 0, 100);
 
+
+
   int s = throttleSpeed + brakeSpeed;
   
-  Motor::setSpeed(s);
+  Motor::setSpeed(s); 
 }
 
 void Motor::offGas(){
   Serial.println("Off Gas Simulated"); 
+  esc.writeMicroseconds(1500);
 }
 
 void Motor::update(){
@@ -78,7 +92,10 @@ void Motor::update(){
     Serial.print(0);
     Serial.println();
     setSpeed(0);
+    offGas();
   }
+
+  
   
   
  
@@ -94,4 +111,8 @@ void Motor::update(){
 void Motor::begin(){
   //intialize motor, pins, drivers etc, maybe do a little jump foward and back 
   Serial.println("Motor Begin Simulated");
+  esc.setPeriodHertz(50);
+  esc.attach(MOTOR_PIN, 1000, 2000); //Pulse Widths go between 1ms to 2ms (1000us to 2000us)
+  esc.writeMicroseconds(1500);
+  delay(3000);
 }

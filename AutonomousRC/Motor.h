@@ -1,8 +1,9 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#define MOTOR_PIN some_pin
+#define MOTOR_PIN 18
 #include <Arduino.h>
+#include <ESP32Servo.h>
 
 class Motor{
   public:
@@ -24,6 +25,7 @@ class Motor{
     int speed;
     int32_t throttle;
     int32_t brake;
+    Servo esc;
 
 };
 
