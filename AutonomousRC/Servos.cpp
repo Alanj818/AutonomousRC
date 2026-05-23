@@ -17,7 +17,7 @@ void Servos::steer(int joyStick){
   
   //do steer calculations
   servo1.write(steerAngle);
-  delay(1);
+  // delay(1);
 }
 
 void Servos::update(){

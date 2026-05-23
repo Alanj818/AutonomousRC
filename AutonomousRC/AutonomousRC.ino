@@ -35,5 +35,5 @@ void setup(){
 
 void loop(){
   controller.update();
-  delay(3000); //for debugging reasons, will take this away after so the loop is continuous and fast. 
+  // delay(3000); //for debugging reasons, will take this away after so the loop is continuous and fast. 
 }

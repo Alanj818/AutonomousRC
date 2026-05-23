@@ -9,6 +9,7 @@
 
 //RESTRUCTURE
 
+
 Motor::Motor(int id){
   motorId = id;
 }
