@@ -14,6 +14,8 @@ joystick GamepadInput::getSteer(){
   joystick stick; 
   stick.x = joyX; 
   stick.y = joyY; 
+  stick.rX = rjoyX; 
+  stick.rY = rjoyY;
   return stick; 
 }
 
@@ -61,6 +63,8 @@ void GamepadInput::update() {
     brake = controller->brake();
     joyY = controller->axisY();
     joyX = controller->axisX();
+    rjoyX = controller->axisRX();
+    rjoyY = controller->axisRY();
   }
 
   if (controller == nullptr || !controller->isConnected()) {
@@ -68,6 +72,8 @@ void GamepadInput::update() {
   brake = 0;
   joyY = 0;
   joyX = 0;
+  rjoyX = 0; 
+  rjoyY = 0;
   return;
 }
 }

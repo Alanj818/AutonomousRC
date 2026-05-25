@@ -65,48 +65,36 @@ void Motor::motorBrake(int32_t throttle, int32_t brake){
   Motor::setSpeed(s); 
 }
 
-void Motor::offGas(){
-  Serial.println("Off Gas Simulated"); 
+void Motor::offGas(){ 
   esc.writeMicroseconds(1500);
 }
 
-void Motor::update(){
-  //running this function should update the analog/speed values
-  Serial.println("Motor Update Simulated");
-
-  Serial.print("analog value of speed "); 
-  Serial.print(speed);
-  Serial.print(" is analog-> "); 
-
-  int analogSpeed = 0;
+void Motor::move(){
   if(speed > 0){
-    analogSpeed = map(speed, 0, 100, 0, 255); 
-    Serial.print(analogSpeed);
-    Serial.println();
     goFoward();
+
   } else if(speed < 0){
-    analogSpeed = map(speed, -100, 0, 255, 0);
-    Serial.print(analogSpeed);
-    Serial.println();
     goReverse();
+
   } else if(speed == 0){
-    Serial.print(0);
-    Serial.println();
     setSpeed(0);
     offGas();
   }
-
-  
-  
-  
- 
-
   //if its going foward, the speed should be between 0 and 100
   //if its going reverse, the speed should be between -100 and 0
   //if its braking, it should just add each other
   /*
     exmple of braking: Brake = -20, Throttle = 50, speed = 50 + -20 --> speed = 30
   */
+  
+}
+
+void Motor::update(){
+  //running this function should update the analog/speed values
+  Serial.printf("%8d", speed);
+  Serial.printf("%8d", throttle);
+  Serial.printf("%8d", brake);
+
 }
 
 void Motor::begin(){

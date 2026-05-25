@@ -33,6 +33,7 @@ void RcController::begin(){
   gamepad->begin();
 }
 
+
 void RcController::update(){
   //controll the update function of all three here
   gamepad->update();
@@ -55,6 +56,7 @@ void RcController::update(){
 
   //This is where we initialize the variable that will take timer input
   static unsigned long prevMillis = 0;
+  static unsigned long prevUpdate = 0; 
 
   //BRAKE TASK
   if (reqBrake) {
@@ -121,15 +123,21 @@ void RcController::update(){
     drive_state = State::NEUTRAL;
     motor->setSpeed(0);
   }
-  
-  servos->steer(joyStick.x);
-  Serial.print("Throttle & Brake: ");
-  Serial.print(throttle);
-  Serial.print(", ");
-  Serial.print(brake);
-  Serial.println();
-  servos->update();
-  motor->update();
+
+  motor->move();
+  servos->steerL(joyStick.x);
+  servos->steerR(joyStick.rX);
+
+  //handle all the updates, 
+  if(millis() - prevUpdate >= 1500){
+    prevUpdate = millis();
+    Serial.printf("%8s %8s %8s %8s %8s\n", "LeftJoy", "RightJoy", "Speed", "Throttle", "Brake");
+    servos->update();
+    motor->update();
+
+    Serial.println();
+  }
+
 
   //add more functionality here, distance, traction control, anything else i could include 
 }

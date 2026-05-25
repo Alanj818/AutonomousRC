@@ -18,6 +18,7 @@ class Motor{
     void setThrottleSpeed(int32_t throttle);
     void setBrakeSpeed(int32_t brake);
     void setSpeed(int speed);
+    void move();
 
   private: 
     int motorId;
