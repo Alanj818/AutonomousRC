@@ -70,3 +70,7 @@ Testing/
 
 #MacOS
 .DS_Store
+
+#Bash Script
+core.*
+/Pi5/bash_scripts/core.*
