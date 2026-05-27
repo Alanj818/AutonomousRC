@@ -1,4 +1,4 @@
-lname: ESP32 + Bluepad32
+name: ESP32 + Bluepad32
 
 on:
   push:
