@@ -9,14 +9,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
     ros-jazzy-navigation2 \
     ros-jazzy-nav2-bringup \
-    ros-jazzy-rviz2\
-    ros-jazzy-slam-toolbox\
+    ros-jazzy-rviz2 \
+    ros-jazzy-slam-toolbox \
     python3-pip \
     python3-colcon-common-extensions \
     git \
     xfce4 \
     xfce4-goodies \
     tigervnc-standalone-server \
+    xvfb \
+    x11vnc \
     novnc \
     websockify \
     dbus-x11 \
