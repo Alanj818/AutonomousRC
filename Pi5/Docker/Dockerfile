@@ -25,12 +25,14 @@ RUN apt update && apt install -y \
 #THIS WILL AUTO SOURCE ROS2
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 
-#THIS WILL AUTO SOURCE MY WORKSPACE
-RUN echo "source /workspace/AutonomousRC/Pi5/ros2_ws/install/setup.bash" >> ~/.bashrc
+#COPY ../bash_scripts/start-novnc.sh /start-novnc.sh
+
+#RUN chmod +x /start-novnc.sh
 
 WORKDIR /workspace
 
 #For noVNC
 EXPOSE 8080 
 
-CMD ["bash"] 
+#CMD ["/start-novnc.sh"]
+CMD ["bash"]
