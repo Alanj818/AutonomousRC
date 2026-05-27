@@ -1,0 +1,23 @@
+services:
+  ros:
+    platform: linux/arm64
+    build: .
+    container_name: autonomous_ros
+
+    network_mode: host
+
+    stdin_open: true
+    tty: true
+
+    environment: 
+      - ROS_DOMAIN_ID=7
+      - DISPLAY=:1
+    
+    volumes: 
+      - ../:/workspace/AutonomousRC
+    
+    devices:
+      - /dev/serial0:/dev/serial0
+    
+    ports: 
+      - "8080:8080"

@@ -1,4 +1,4 @@
-name: ESP32 + Bluepad32
+lname: ESP32 + Bluepad32
 
 on:
   push:
@@ -38,4 +38,4 @@ jobs:
         run: |
           ./bin/arduino-cli compile \
             --fqbn esp32-bluepad32:esp32:esp32 \
-            AutonomousRC
+            AutonomousRC/ESP32/AutonomousRC

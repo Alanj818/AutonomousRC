@@ -47,8 +47,8 @@
 
 ## Images of What I currently Use
 
-![This is The Controller](PurpleController.jpeg "Xbox One Controller")
+![This is The Controller](README/PurpleController.jpeg "Xbox One Controller")
 
-![This is the ESP32](ESP32.png "ESP32 Freenove Wrover Module")
+![This is the ESP32](ESP32.png "README/ESP32 Freenove Wrover Module")
 
-![This is the RC CAR](Thraxxas.png "Thraxxas Slash RC 1/10")
+![This is the RC CAR](Thraxxas.png "README/Thraxxas Slash RC 1/10")
