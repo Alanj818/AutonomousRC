@@ -1,6 +1,6 @@
 services:
   ros:
-    platform: linux/arm64/v8
+    platform: linux/arm64
     build: .
     container_name: autonomous_ros
 

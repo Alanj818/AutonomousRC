@@ -1,7 +1,7 @@
 #Building an Ubuntu Environment containing: ROS2, NAV2, RVIZ, noVNC and thats it 
 
 #Installs Ubuntu24.04 with Ros2-jazzy-desktop
-FROM osrf/ros:jazzy-desktop
+FROM arm64v8/ros:jazzy-perception
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -9,6 +9,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
     ros-jazzy-navigation2 \
     ros-jazzy-nav2-bringup \
+    ros-jazzy-rviz2\
+    ros-jazzy-slam-toolbox\
     python3-pip \
     python3-colcon-common-extensions \
     git \
