@@ -1,6 +1,6 @@
 services:
   ros:
-    platform: linux/arm64
+    platform: linux/arm64/v8
     build: .
     container_name: autonomous_ros
 
@@ -18,6 +18,3 @@ services:
     
     devices:
       - /dev/serial0:/dev/serial0
-    
-    ports: 
-      - "8080:8080"
