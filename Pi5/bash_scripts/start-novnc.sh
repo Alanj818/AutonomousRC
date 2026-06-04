@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 
-export DISPLAY=:1
+export USER=root
 
-Xvfb :1 -screen 0 1280x800x24 &
-sleep 2
+mkdir -p ~/.vnc
 
-startxfce4 &
-sleep 3
+cat > ~/.vnc/xstartup <<'EOF'
+#!/usr/bin/env bash
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+exec startxfce4
+EOF
 
-x11vnc -display :1 -nopw -forever -shared -rfbport 5900 &
-sleep 2
+chmod +x ~/.vnc/xstartup
 
-/usr/share/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 8080 &
+# Kill old sessions if they exist
+vncserver -kill :1 2>/dev/null || true
 
-sleep infinity
+# Start TigerVNC
+vncserver :1 -geometry 1280x800 -depth 24
+
+# Start noVNC proxy
+/usr/share/novnc/utils/novnc_proxy \
+    --vnc localhost:5901 \
+    --listen 8080

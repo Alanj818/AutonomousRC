@@ -74,3 +74,14 @@ Testing/
 #Bash Script
 core.*
 /Pi5/bash_scripts/core.*
+
+#VSCODE 
+.vscode
+
+#lidar training data
+model_training/Toronto_Lidar
+model_training/Toronto_Lidar/
+
+#Builds 
+mac-windows-desktop/lidar_visualizer/build
+mac-windows-desktop/lidar_visualizer/build/
