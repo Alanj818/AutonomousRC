@@ -7,6 +7,8 @@ int main()
 {
     // create the window
     sf::RenderWindow window(sf::VideoMode({800, 600}), "liDAR Visualizer");
+
+    //variables
     float cell_size = 7.f;
     float robot_size = 10.f;
     grid g(cell_size, window.getSize());
@@ -15,6 +17,10 @@ int main()
     r.set_color(color);
     r.set_position(400.0f, 300.0f);
     sf::Clock clock;
+    float robotAngle = 0.f;
+    float dt = 0.f;
+    sf::Vector2f robotPos = {0.f, 0.f};
+    sf::Vector2i obstaclePos = {0, 0};
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -28,25 +34,25 @@ int main()
         }
 
         //these are robot angle, robot position, and time values
-        float robotAngle = r.getRotation();
-        float dt = clock.restart().asSeconds();
-        sf::Vector2f robotPos = r.getPosition();
+        robotAngle = r.getRotation();
+        dt = clock.restart().asSeconds();
+        robotPos = r.getPosition();
 
         //these handle inputs on keyboard for now
         r.handle_input(dt);
         g.handleInput();
         
         //these configure the grid for robot position and a "fake" scan 100cm in front of the robot at all times, like if something is always in front of it 100cm
-        g.setCell(static_cast<int>(robotPos.y / cell_size), static_cast<int>(robotPos.x / cell_size), grid::cellData::Taken);
-        sf::Vector2i obstaclePos = g.lidarToGrid(100.f, static_cast<int>(robotAngle), robotPos);
+        obstaclePos = g.lidarToGrid(100.f, static_cast<int>(robotAngle), robotPos);
         g.setCell(obstaclePos.y, obstaclePos.x, grid::cellData::Obstacle);
+        g.setCell(static_cast<int>(robotPos.y / cell_size), static_cast<int>(robotPos.x / cell_size), grid::cellData::Taken);
 
         //this just prints out the angle continuously for debugging reasons
         std::cout << robotAngle << std::endl;
 
 
 
-        
+
         // clear the window with black color
         window.clear(sf::Color::Black);
 

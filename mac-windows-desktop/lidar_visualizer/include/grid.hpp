@@ -12,6 +12,7 @@ class grid{
             Obstacle,
             Free,
             Taken,
+            Unknown
         };
         grid(float cell_size, sf::Vector2u window_size); 
         void drawGrid(sf::RenderWindow& window);
