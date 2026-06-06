@@ -124,6 +124,7 @@ void RcController::update(){
     motor->setSpeed(0);
   }
 
+  uint16_t teset_lidar = lidar->getDistance();
   motor->move();
   servos->steerL(joyStick.x);
   servos->steerR(joyStick.rX);
@@ -134,7 +135,8 @@ void RcController::update(){
     Serial.printf("%8s %8s %8s %8s %8s\n", "LeftJoy", "RightJoy", "Speed", "Throttle", "Brake");
     servos->update();
     motor->update();
-
+    Serial.println();
+    lidar->update();
     Serial.println();
   }
 
