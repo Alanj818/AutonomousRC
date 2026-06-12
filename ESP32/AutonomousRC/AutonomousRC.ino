@@ -5,6 +5,7 @@
 #include "Interrupts.h"
 #include "Lidar.h"
 #include "RcController.h"
+#include "Wifi.h"
 
 //virtualize hardware for now 
 /*
@@ -23,7 +24,8 @@ Motor motor(0);
 Lidar lidar(0); 
 Servos servos(0);
 GamepadInput gamepad;
-RcController controller(&motor, &servos, &lidar, &gamepad);
+Wifi wifi;
+RcController controller(&motor, &servos, &lidar, &gamepad, &wifi);
 
 
 void setup(){

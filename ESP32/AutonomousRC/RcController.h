@@ -4,10 +4,11 @@
 #include "Lidar.h"
 #include "Servos.h"
 #include "GamepadInput.h"
+#include "Wifi.h"
 
 class RcController{
   public:
-    RcController(Motor* mo, Servos* s, Lidar* l, GamepadInput* g);
+    RcController(Motor* mo, Servos* s, Lidar* l, GamepadInput* g, Wifi* w);
 
     void begin(); 
     void update(); 
@@ -17,6 +18,7 @@ class RcController{
     Servos* servos; 
     Lidar* lidar; 
     GamepadInput* gamepad;
+    Wifi* wifi;
 };
 
 #endif

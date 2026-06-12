@@ -9,9 +9,11 @@ target_sources(lidar_visualizer
         src/main.cpp
         src/robot.cpp
         src/grid.cpp
+        src/Wifi.cpp
     PUBLIC 
         include/robot.hpp
         include/grid.hpp
+        include/Wifi.hpp
 )
 
 target_include_directories(lidar_visualizer

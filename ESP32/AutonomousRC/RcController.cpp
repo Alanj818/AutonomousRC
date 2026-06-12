@@ -1,7 +1,7 @@
 #include "RcController.h"
 #include <Arduino.h>
 
-RcController::RcController(Motor* motor, Servos* servos, Lidar* lidar, GamepadInput* gamepad) : motor(motor), servos(servos), lidar(lidar), gamepad(gamepad) {}
+RcController::RcController(Motor* motor, Servos* servos, Lidar* lidar, GamepadInput* gamepad, Wifi* wifi) : motor(motor), servos(servos), lidar(lidar), gamepad(gamepad), wifi(wifi) {}
 
 
 //STATES
@@ -31,6 +31,7 @@ void RcController::begin(){
   servos->begin(); 
   lidar->begin(); 
   gamepad->begin();
+  wifi->begin();
 }
 
 
@@ -123,8 +124,13 @@ void RcController::update(){
     drive_state = State::NEUTRAL;
     motor->setSpeed(0);
   }
-
-  uint16_t teset_lidar = lidar->getDistance();
+  static unsigned long lastUpdate = 0;
+  if(millis() - lastUpdate >= 50){
+    lastUpdate = millis();
+    uint16_t test_lidar = lidar->getDistance();
+    wifi->sendData(test_lidar);
+  }
+ 
   motor->move();
   servos->steerL(joyStick.x);
   servos->steerR(joyStick.rX);
@@ -137,6 +143,8 @@ void RcController::update(){
     motor->update();
     Serial.println();
     lidar->update();
+    Serial.println();
+    wifi->update();
     Serial.println();
   }
 
