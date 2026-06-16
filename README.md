@@ -2,13 +2,13 @@
 
 ## Goals
 
-* Replace Transmitter/Receiver with ESP32 and XBOX controller using Bluepad32 Library
-* Use RasperryPi 4 and LiDAR camera for vision mapping and path planning
+* Replace Transmitter/Receiver with ESP32 and XBOX controller using Bluepad32 Library **DONE**
+* Use RasperryPi 4 and LiDAR camera for vision mapping and path planning 
 * Create a React WebApp to remotely connect to the RC car for anyone globablly to use (Europe, Asia, etc.)
 
 ### SubGoals
 
-1. Understand integration of Different systems Before relying on freeRTOS
+1. Understand integration of Different systems Before relying on freeRTOS **DONE**
 2. Implement and use ROS for visual mapping/algorithms 
 3. Create an entire Embedded System from Scratch. 
 4. Implement a CI/CD workflow environment. 
@@ -52,3 +52,5 @@
 ![This is the ESP32](README/ESP32.png "ESP32 Freenove Wrover Module")
 
 ![This is the RC CAR](README/Thraxxas.png "Thraxxas Slash RC 1/10")
+
+![This is Lidar Occupancy Grid](README/Lidar_Visualizer_SFML.png "Lidar Occupancy Grid")

@@ -3,7 +3,7 @@
 Wifi::Wifi() {}
 
 WiFiUDP udp;
-IPAddress broadcastIP(192,168,4,35); //broadcast to anyone on wifi, using private wifi/hotspot so should be fine
+IPAddress broadcastIP(255,255,255,255); //broadcast to anyone on wifi, using private wifi/hotspot so should be fine
 
 void Wifi::begin(){
     WiFi.disconnect();
