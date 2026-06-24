@@ -1,7 +1,7 @@
 #include "RcController.h"
 #include <Arduino.h>
 
-RcController::RcController(Motor* motor, Servos* servos, Lidar* lidar, GamepadInput* gamepad, Wifi* wifi) : motor(motor), servos(servos), lidar(lidar), gamepad(gamepad), wifi(wifi) {}
+RcController::RcController(Motor* motor, Servos* servos, Lidar* lidar, GamepadInput* gamepad, Wifi* wifi, IMU* imu) : motor(motor), servos(servos), lidar(lidar), gamepad(gamepad), wifi(wifi), imu(imu) {}
 
 
 //STATES
@@ -32,6 +32,7 @@ void RcController::begin(){
   lidar->begin(); 
   gamepad->begin();
   wifi->begin();
+  imu->begin();
 }
 
 
@@ -129,6 +130,7 @@ void RcController::update(){
     lastUpdate = millis();
     uint16_t test_lidar = lidar->getDistance();
     wifi->sendData(test_lidar);
+    imu->fillData();
   }
  
   motor->move();
@@ -145,6 +147,8 @@ void RcController::update(){
     lidar->update();
     Serial.println();
     wifi->update();
+    Serial.println();
+    imu->update();
     Serial.println();
   }
 
