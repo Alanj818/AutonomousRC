@@ -138,7 +138,6 @@ void RcController::update(){
   motor->move();
   servos->steerL(joyStick.x);
   servos->steerR(joyStick.rX);
-
   pi->getCommands();
 
   //handle all the updates, 

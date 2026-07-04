@@ -10,7 +10,7 @@ int main(){
     PiToESP pi;
     PiToESP lidar;
     pi.begin("/dev/serial0", 115200); //uart0 /dev/ttyAMA10
-    //lidar.begin("/dev/ttyAMA2", 115200); //uart2 /dev/ttyAMA2 PINS GPIO4(TX) GPIO5(RX)
+    lidar.begin("/dev/ttyAMA2", 115200); //uart2 /dev/ttyAMA2 PINS GPIO4(TX) GPIO5(RX)
     
     auto lastTime = Clock::now();
     for(;;){

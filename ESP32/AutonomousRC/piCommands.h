@@ -1,7 +1,7 @@
 #ifndef PI_H
 #define PI_H
 
-#define PI_PIN 21
+#define PI_PIN 32
 #include <Arduino.h>
 
 //Will be using UART to communicate with the Raspberry Pi

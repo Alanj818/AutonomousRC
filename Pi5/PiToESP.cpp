@@ -66,8 +66,8 @@ void PiToESP::begin(const std::string& ch, int baud){
 void PiToESP::sendPackets(/*void* buffer*/){
     //this is just to make sure UART0 Works so inputting default values for now
     uart.start = 0xAA;
-    uart.brake = 0;
     uart.throttle = 5;
+    uart.brake = 0;
     uart.steering = 5;
     uart.checksum = uart.start ^ uart.brake ^ uart.throttle ^ uart.steering;
     ssize_t n = write(fd, &uart, sizeof(uart));

@@ -1,7 +1,7 @@
 #include "piCommands.h"
 #include <Arduino.h>
 
-piCommands::piCommands() : pi(2) {}
+piCommands::piCommands() : pi(2){}
 
 
 void piCommands::begin(){
@@ -17,7 +17,7 @@ void piCommands::getCommands(){
 
   while(pi.available() > 0){
     auto p = pi.read();
-    Serial.printf("First Byte: %02X\n", (uint8_t)p);
+    //Serial.printf("First Byte: %02X\n", (uint8_t)p);
     if(p < 0){
       break;
     }
@@ -27,7 +27,7 @@ void piCommands::getCommands(){
       if(p == 0xAA){
         state = 1;
         idx = 1;
-        Serial.printf("Passed State 0");
+        //Serial.printf("Passed State 0\n");
       }
     } else if (state == 1){
       //fill up buffer here
@@ -35,7 +35,7 @@ void piCommands::getCommands(){
 
         if(idx == 5){
           checksum = bits[0] ^ bits[1] ^ bits[2] ^ bits[3];
-          Serial.printf("YOU REACHED CHECKSUM");
+          //Serial.printf("YOU REACHED CHECKSUM\n");
           
           if(checksum == bits[4]){
             throttle = static_cast<int8_t>(bits[1]);
