@@ -7,6 +7,7 @@
 #include "RcController.h"
 #include "Wifi.h"
 #include "IMU.h"
+#include "piCommands.h"
 
 //virtualize hardware for now 
 /*
@@ -27,7 +28,9 @@ Servos servos(0);
 GamepadInput gamepad;
 Wifi wifi;
 IMU imu;
-RcController controller(&motor, &servos, &lidar, &gamepad, &wifi, &imu);
+piCommands pi;
+
+RcController controller(&motor, &servos, &lidar, &gamepad, &wifi, &imu, &pi);
 
 
 void setup(){

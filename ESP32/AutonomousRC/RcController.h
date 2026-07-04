@@ -6,10 +6,11 @@
 #include "GamepadInput.h"
 #include "Wifi.h"
 #include "IMU.h"
+#include "piCommands.h"
 
 class RcController{
   public:
-    RcController(Motor* mo, Servos* s, Lidar* l, GamepadInput* g, Wifi* w, IMU* i);
+    RcController(Motor* mo, Servos* s, Lidar* l, GamepadInput* g, Wifi* w, IMU* i, piCommands* pi);
 
     void begin(); 
     void update(); 
@@ -21,6 +22,7 @@ class RcController{
     GamepadInput* gamepad;
     Wifi* wifi;
     IMU* imu;
+    piCommands* pi;
 };
 
 #endif

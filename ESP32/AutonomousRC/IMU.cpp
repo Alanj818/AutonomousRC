@@ -12,14 +12,14 @@ void IMU::begin(){
 }
 
 void IMU::update(){
-  Serial.println("Gyro Data: ");
-  Serial.println(data.accel_x);
-  Serial.println(data.accel_y);
-  Serial.println(data.accel_z);
-  Serial.println(data.temp);
-  Serial.println(data.gyro_x);
-  Serial.println(data.gyro_y);
-  Serial.println(data.gyro_z);
+  Serial.println("IMU Data: ");
+  Serial.println(data_converted.accel_x);
+  Serial.println(data_converted.accel_y);
+  Serial.println(data_converted.accel_z);
+  Serial.println(data_converted.temp);
+  Serial.println(data_converted.gyro_x);
+  Serial.println(data_converted.gyro_y);
+  Serial.println(data_converted.gyro_z);
 }
 
 void IMU::fillData(){
@@ -49,4 +49,16 @@ void IMU::fillData(){
 
 IMU_DATA IMU::getData() const{
   return data;
+}
+
+void IMU::handleDataConversion(){
+  data_converted.accel_x = data.accel_x / 16384.0f;
+  data_converted.accel_y = data.accel_y / 16384.0f;
+  data_converted.accel_z = data.accel_z / 16384.0f;
+
+  data_converted.temp = data.temp / 340.0f + 36.53f;
+
+  data_converted.gyro_x = data.gyro_x / 131.0f;
+  data_converted.gyro_y = data.gyro_y / 131.0f;
+  data_converted.gyro_z = data.gyro_z / 131.0f;
 }
