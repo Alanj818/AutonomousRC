@@ -15,7 +15,7 @@ class piCommands{
   
   private:
     HardwareSerial pi;
-    int8_t bits[5];
+    uint8_t bits[5];
     int8_t throttle = 0;
     int8_t steering = 0;
     int8_t brake = 0;

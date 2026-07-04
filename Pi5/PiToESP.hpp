@@ -11,11 +11,11 @@
 #include <cstdint>
 
 struct UART{
-    int8_t start;
-    int8_t throttle;
-    int8_t brake;
-    int8_t steering;
-    int8_t checksum;
+    uint8_t start;
+    uint8_t throttle;
+    uint8_t brake;
+    uint8_t steering;
+    uint8_t checksum;
 };
 
 class PiToESP {

@@ -18,6 +18,7 @@ int main(){
         if(now - lastTime >= std::chrono::milliseconds(20)){
             lastTime = now;
             pi.sendPackets();
+            std::cout << "sending packets" << std::endl;
         }
         
     }

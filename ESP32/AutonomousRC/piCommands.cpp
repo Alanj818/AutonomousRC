@@ -17,6 +17,7 @@ void piCommands::getCommands(){
 
   while(pi.available() > 0){
     auto p = pi.read();
+    Serial.printf("First Byte: %02X\n", (uint8_t)p);
     if(p < 0){
       break;
     }
@@ -26,6 +27,7 @@ void piCommands::getCommands(){
       if(p == 0xAA){
         state = 1;
         idx = 1;
+        Serial.printf("Passed State 0");
       }
     } else if (state == 1){
       //fill up buffer here
@@ -33,11 +35,12 @@ void piCommands::getCommands(){
 
         if(idx == 5){
           checksum = bits[0] ^ bits[1] ^ bits[2] ^ bits[3];
+          Serial.printf("YOU REACHED CHECKSUM");
           
           if(checksum == bits[4]){
-            throttle = bits[1];
-            brake = bits[2];
-            steering = bits[3];
+            throttle = static_cast<int8_t>(bits[1]);
+            brake = static_cast<int8_t>(bits[2]);
+            steering = static_cast<int8_t>(bits[3]);
           }
           state = 0;
           idx = 0;

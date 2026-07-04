@@ -85,3 +85,5 @@ model_training/Toronto_Lidar/
 #Builds 
 mac-windows-desktop/lidar_visualizer/build
 mac-windows-desktop/lidar_visualizer/build/
+Pi5/uart
+Pi5/uart_test
