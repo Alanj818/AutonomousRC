@@ -18,16 +18,22 @@ struct UART{
     uint8_t checksum;
 };
 
+struct LIDAR{
+
+};
+
 class PiToESP {
 public:
     PiToESP();
     void begin(const std::string& ch, int baud = 9600);
     void sendPackets(/*void* buffer*/);
+    void receivePackets();
     void end();
     
 
 private:
     UART uart;
+    LIDAR lidar;//i dont think i need this to recieve
     termios tty;
     int fd = -1;
 };

@@ -15,15 +15,21 @@ class Node{
         void setG(int n); 
         int getF() const;
         void setF(int g, int h);
+        void setIsOpen(bool n);
+        void setIsClosed(bool n);
+        bool getIsOpen();
+        bool getIsClosed();
 
         Node* getParent() const;
         void setParent(Node* n);
     private: 
         int x; 
         int y; 
-        int g; 
-        int h; 
-        int f;
+        int g = std::numeric_limits<int>::max(); 
+        int h = 0;
+        int f = std::numeric_limits<int>::max();
+        bool isOpen = false;
+        bool isClosed = false;
         Node* parent;
 
 };

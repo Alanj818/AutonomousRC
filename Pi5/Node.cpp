@@ -56,3 +56,14 @@ void Node::setParent(Node* n){
         this->parent = n;
 }
 
+void Node::setIsClosed(bool n){
+        isClosed = n;
+}
+
+bool Node::getIsClosed(){
+        return isClosed;
+}
+
+void Node::setIsOpen(bool n){
+        isOpen = n;
+}

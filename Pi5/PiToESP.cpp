@@ -77,6 +77,13 @@ void PiToESP::sendPackets(/*void* buffer*/){
     }
 }
 
+LIDAR PiToESP::receivePackets(/*void* buffer*/){
+    uint8_t buffer[9];
+    ssize_t n = read(fd, &buffer, sizeof(lidar));
+    
+    return lidar;
+}
+
 void PiToESP::end(){
     if(fd != -1){
         close(fd);
