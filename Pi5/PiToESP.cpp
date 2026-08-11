@@ -79,8 +79,72 @@ void PiToESP::sendPackets(/*void* buffer*/){
 
 LIDAR PiToESP::receivePackets(/*void* buffer*/){
     uint8_t buffer[9];
-    ssize_t n = read(fd, &buffer, sizeof(lidar));
-    
+    ssize_t n = read(fd, buffer, sizeof(buffer));
+
+    //start of state machine
+    static int state = 0; 
+    static int idx = 0;
+
+    if(n < 0){
+        //there will be a lidar.error = some enum lidar error 
+        lidar.error = LidarError::Error;
+        return lidar;
+    } else if(n == 0){
+        //there will be a lidar.error = some enum lidar no bytes error
+        lidar.error = LidarError::NoBytes;
+        return lidar;
+    } else if(n > 0){
+        //there were bytes do the checksum and all
+        for(ssize_t i = 0; i < n; i++){
+            uint8_t byte = buffer[i];
+
+            if(state == 0 && byte == 0x59){
+                //if were at state 0 and see a 0x59, add it and go to state 1
+                packet[idx++] = byte;
+                state = 1;
+            } else if(state == 1){
+                //if were at state 1 and see a 0x59, add it and then go to state 2
+                if(byte == 0x59){
+                    packet[idx++] = byte;
+                    state = 2;
+                } else {
+                    state = 0; 
+                    idx = 0;
+                }
+            } else if(state == 2){
+                //if were at state 2, then we met all conditions to fill up the rest of the packet and do a checksum
+                packet[idx++] = byte;
+                if(idx == 9){
+                    //checksum here
+                    uint8_t checksum = 0;
+                    for(int i = 0; i < 8; i++){
+                        checksum += packet[i];
+                    }
+                    if(checksum != packet[8]){
+                        idx = 0;
+                        state = 0;
+                        lidar.error = LidarError::Checksum;
+                        return lidar;
+                    } else {
+                        idx = 0;
+                        state = 0;
+                        uint8_t lowD = packet[2];
+                        uint8_t highD = packet[3];
+                        lidar.distance = lowD | (highD << 8);
+                        lidar.error = LidarError::NoError;
+                        return lidar;
+                    }
+
+                }
+            }
+
+        }
+        //there will be an error for non matching 0x59s in the first 2 bytes and return
+        //there will be an error for incorrect checksum and return
+
+    }
+    //here if all went right, lidar.error = some enum lidar no error value
+    lidar.error = LidarError::Incomplete;
     return lidar;
 }
 

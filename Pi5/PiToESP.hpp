@@ -19,7 +19,16 @@ struct UART{
 };
 
 struct LIDAR{
+    LidarError error = LidarError::NoError;
+    uint16_t distance;
+};
 
+enum class LidarError{
+    Error,
+    NoBytes,
+    NoError, 
+    Checksum,
+    Incomplete
 };
 
 class PiToESP {
@@ -27,15 +36,16 @@ public:
     PiToESP();
     void begin(const std::string& ch, int baud = 9600);
     void sendPackets(/*void* buffer*/);
-    void receivePackets();
+    LIDAR receivePackets();
     void end();
     
 
 private:
     UART uart;
-    LIDAR lidar;//i dont think i need this to recieve
+    LIDAR lidar;//i dont think i need this to recieve.... i actually did lol 
     termios tty;
     int fd = -1;
+    uint8_t packet[9];
 };
 
 #endif
