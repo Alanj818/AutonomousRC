@@ -9,6 +9,7 @@ using Clock = std::chrono::steady_clock;
 int main(){
     PiToESP pi;
     PiToESP lidar;
+    LIDAR lidar_packet;
     pi.begin("/dev/serial0", 115200); //uart0 /dev/ttyAMA10
     lidar.begin("/dev/ttyAMA2", 115200); //uart2 /dev/ttyAMA2 PINS GPIO4(TX) GPIO5(RX)
     
@@ -17,9 +18,11 @@ int main(){
         auto now = Clock::now();
         if(now - lastTime >= std::chrono::milliseconds(20)){
             lastTime = now;
-            pi.sendPackets();
-            lidar.sendPackets();
-            std::cout << "sending packets" << std::endl;
+            //pi.sendPackets();
+            lidar_packet = pi.receivePackets();
+            //lidar.sendPackets();
+            lidar_packet = lidar.receivePackets();
+            std::cout << "UART0: "<< lidar_packet.distance << "\n" << std::endl;
         }
         
     }

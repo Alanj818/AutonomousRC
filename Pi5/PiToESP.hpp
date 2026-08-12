@@ -18,11 +18,6 @@ struct UART{
     uint8_t checksum;
 };
 
-struct LIDAR{
-    LidarError error = LidarError::NoError;
-    uint16_t distance;
-};
-
 enum class LidarError{
     Error,
     NoBytes,
@@ -30,6 +25,13 @@ enum class LidarError{
     Checksum,
     Incomplete
 };
+
+struct LIDAR{
+    LidarError error = LidarError::NoError;
+    uint16_t distance;
+};
+
+
 
 class PiToESP {
 public:
