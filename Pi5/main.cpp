@@ -20,9 +20,30 @@ int main(){
             lastTime = now;
             //pi.sendPackets();
             lidar_packet = pi.receivePackets();
+
+            //Well it didn't magically work so heres my debugging prints 
+            if(lidar_packet.error == LidarError::NoError){
+                std::cout << "UART0: "<< lidar_packet.distance << "\n" << std::endl;
+
+            }
+
+            if(lidar_packet.error == LidarError::NoBytes){
+                std::cout << "Lidar Sent No Packets" << std::endl;
+            }
+
+            if(lidar_packet.error == LidarError::Checksum){
+                std::cout << "Checksum for the package was not valid" << std::endl;
+            }
+
+            if(lidar_packet.error == LidarError::Incomplete){
+                std::cout << "Still waiting on complete packet" << std::endl;
+            }
+
+            if(lidar_packet.error == LidarError::Error){
+                std::cout << "Something went wrong while attempting to read packets" << std::endl;
+            }
             //lidar.sendPackets();
-            lidar_packet = lidar.receivePackets();
-            std::cout << "UART0: "<< lidar_packet.distance << "\n" << std::endl;
+            //lidar_packet = lidar.receivePackets();
         }
         
     }
