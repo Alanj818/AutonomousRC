@@ -53,7 +53,7 @@ void PiToESP::begin(const std::string& ch, int baud){
     tty.c_oflag &= ~OPOST;
     
     tty.c_cc[VMIN] = 0;
-    tty.c_cc[VTIME] = 1;
+    tty.c_cc[VTIME] = 0;
     
     //this allows for BAUD B115200, SERIAL_8N1
     

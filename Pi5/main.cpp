@@ -23,24 +23,24 @@ int main(){
 
             //Well it didn't magically work so heres my debugging prints 
             if(lidar_packet.error == LidarError::NoError){
-                std::cout << "UART0: "<< lidar_packet.distance << "\n" << std::endl;
+                std::cout << "UART0: "<< lidar_packet.distance << "\n";
 
             }
 
             if(lidar_packet.error == LidarError::NoBytes){
-                std::cout << "Lidar Sent No Packets" << std::endl;
+                std::cout << "Lidar Sent No Packets" << "\n";
             }
 
             if(lidar_packet.error == LidarError::Checksum){
-                std::cout << "Checksum for the package was not valid" << std::endl;
+                std::cout << "Checksum for the package was not valid" << "\n";
             }
 
             if(lidar_packet.error == LidarError::Incomplete){
-                std::cout << "Still waiting on complete packet" << std::endl;
+                std::cout << "Still waiting on complete packet" << "\n";
             }
 
             if(lidar_packet.error == LidarError::Error){
-                std::cout << "Something went wrong while attempting to read packets" << std::endl;
+                std::cout << "Something went wrong while attempting to read packets" << "\n";
             }
             //lidar.sendPackets();
             //lidar_packet = lidar.receivePackets();
