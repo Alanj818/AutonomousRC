@@ -87,3 +87,4 @@ mac-windows-desktop/lidar_visualizer/build
 mac-windows-desktop/lidar_visualizer/build/
 Pi5/uart
 Pi5/uart_test
+Pi5/uart0_test
