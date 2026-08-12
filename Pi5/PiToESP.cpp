@@ -78,12 +78,13 @@ void PiToESP::sendPackets(/*void* buffer*/){
 }
 
 LIDAR PiToESP::receivePackets(/*void* buffer*/){
-    uint8_t buffer[9];
+    uint8_t buffer[128];
     ssize_t n = read(fd, buffer, sizeof(buffer));
 
     //start of state machine
     static int state = 0; 
     static int idx = 0;
+    bool validFrame = false;
 
     if(n < 0){
         //there will be a lidar.error = some enum lidar error 
@@ -120,28 +121,30 @@ LIDAR PiToESP::receivePackets(/*void* buffer*/){
                     for(int i = 0; i < 8; i++){
                         checksum += packet[i];
                     }
-                    if(checksum != packet[8]){
-                        idx = 0;
-                        state = 0;
-                        lidar.error = LidarError::Checksum;
-                        return lidar;
-                    } else {
-                        idx = 0;
-                        state = 0;
-                        uint8_t lowD = packet[2];
-                        uint8_t highD = packet[3];
+
+                    if(checksum == packet[8]){
+                        uint16_t lowD = packet[2];
+                        uint16_t highD = packet[3];
                         lidar.distance = lowD | (highD << 8);
                         lidar.error = LidarError::NoError;
-                        return lidar;
+                        validFrame = true;
+                    } else {
+                        idx = 0; 
+                        state = 0;
+                        lidar.error = LidarError::Checksum;
                     }
-
+                    
+                    idx = 0; 
+                    state = 0;
                 }
             }
 
         }
         //there will be an error for non matching 0x59s in the first 2 bytes and return
         //there will be an error for incorrect checksum and return
-
+    }
+    if(validFrame){
+        return lidar;
     }
     //here if all went right, lidar.error = some enum lidar no error value
     lidar.error = LidarError::Incomplete;
